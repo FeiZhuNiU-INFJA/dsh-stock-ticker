@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<owner>/dsh-market.git"
+    "url": "git+https://github.com/FeiZhuNiU-INFJA/dsh-market.git"
   },
   "type": "module",
   "dsh": {
