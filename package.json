@@ -1,0 +1,30 @@
+{
+  "name": "dsh-market",
+  "version": "0.1.0",
+  "description": "A floating, semi-transparent market ticker for DeepSeek Harness: real-time 上证指数 / 创业板指 / 科创50 / 恒生科技.",
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "stock",
+    "market",
+    "quote",
+    "index",
+    "shanghai",
+    "hangseng"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<owner>/dsh-market.git"
+  },
+  "type": "module",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# Permanent-install composition patch layer (used once the plugin is built as a
+# DSH package and added to a profile). For the immediate dynamic-plugin install
+# path, see README.md — this file is not required.
+- insert:
+    - id: market
+      name: 'dsh-market'
