@@ -48,10 +48,12 @@
 
 ```
 dsh-stock-ticker/
-├── host.js        # Host 半区：curl 抓取腾讯行情接口并解析
-├── client.js      # Client 半区：悬浮窗 UI + 5s 轮询
-├── package.json   # 包清单（keywords 含 dsh-plugin）
-├── cordis.patch.yml  # 持久化安装用的组合 patch 层（可选）
+├── lib/index.js    # Host 包入口：注册 /dsh-stock-ticker/quotes 路由
+├── lib/client.js   # Client bundle：悬浮窗 UI + 5s 轮询
+├── host.js         # 动态插件形式的 Host 半区（可选）
+├── client.js       # 动态插件形式的 Client 半区（可选）
+├── package.json    # 包清单（dsh bundle + client 声明）
+├── cordis.patch.yml  # bundle patch：插入插件行
 ├── assets/screenshot.png  # README 预览截图
 ├── LICENSE
 └── README.md
@@ -63,15 +65,20 @@ dsh-stock-ticker/
 - 免费、无需鉴权，返回纯文本的 `~` 分隔行
 - Host 侧通过 `shell` 服务执行 `curl` 抓取（DSH 默认部署未注册 `web` fetch provider，因此不走 `web.fetch`）
 
-## 📦 持久化安装（可选）
+## 📦 持久化安装（常驻）
 
-当前 `package.json` / `cordis.patch.yml` 已按社区 `dsh-plugin` 约定预留了包结构。要作为常驻插件（随 DSH 启动自动加载）还需要：
+把插件作为 DSH profile 的一个 bundle 安装，随 DSH 启动自动加载、重启不消失：
 
-1. 把 Host 半区改写成 DSH 包入口（`export function apply(ctx)`），并把 Host→Client 通信从动态插件的 `harness.handle`/`host.call` 迁移到 DSH 的 remote / projection 机制；
-2. 用标准工具链构建客户端 bundle（`dsh.client` → `./client`）；
-3. 发布 npm 后通过 `dsh plugin --profile <profile> add dsh-stock-ticker@0.1.0` 安装。
+1. 把本仓库软链到 profile 的 node_modules：
 
-欢迎 PR 补齐这一步。
+   ```bash
+   ln -sfn /path/to/dsh-stock-ticker "$HOME/.dsh/profiles/node_modules/dsh-stock-ticker"
+   ```
+
+2. 在 `$HOME/.dsh/profiles/<profile>/package.json` 的 `dsh.profile.bundles` 数组里加入 `"dsh-stock-ticker"`。
+3. 重启 DSH Desktop。
+
+> 结构参照社区 `dsh-plugin` 约定（与 `dsh-skin-cursor` 相同）：Host 入口 `lib/index.js` 注册同源路由 `/dsh-stock-ticker/quotes`（内部用 `shell` + `curl` 抓取腾讯行情），Client bundle `lib/client.js` 渲染悬浮窗并每 5 秒 `fetch` 该路由。
 
 ## 📄 License
 
