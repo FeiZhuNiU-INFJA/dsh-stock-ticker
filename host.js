@@ -1,4 +1,4 @@
-// dsh-market — Host half (dynamic-plugin form)
+// dsh-stock-ticker — Host half (dynamic-plugin form)
 //
 // This file is the exact `code.host` body for a DeepSeek Harness dynamic Cordis
 // plugin. Load it with the Host `code.host` of `cordis_define` (see README).

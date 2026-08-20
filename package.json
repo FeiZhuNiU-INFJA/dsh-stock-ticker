@@ -1,5 +1,5 @@
 {
-  "name": "dsh-market",
+  "name": "dsh-stock-ticker",
   "version": "0.1.0",
   "description": "A floating, semi-transparent market ticker for DeepSeek Harness: real-time 上证指数 / 创业板指 / 科创50 / 恒生科技.",
   "license": "MIT",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FeiZhuNiU-INFJA/dsh-market.git"
+    "url": "git+https://github.com/FeiZhuNiU-INFJA/dsh-stock-ticker.git"
   },
   "type": "module",
   "dsh": {

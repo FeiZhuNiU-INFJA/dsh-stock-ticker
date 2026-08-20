@@ -1,4 +1,4 @@
-# 🧩 dsh-market
+# 🧩 dsh-stock-ticker
 
 > DeepSeek Harness 的一个悬浮行情插件：在页面右上角显示一个可拖拽、可收起的半透明小窗，实时展示 A 股与港股核心指数。
 
@@ -41,7 +41,7 @@
 ## 🗂️ 代码结构
 
 ```
-dsh-market/
+dsh-stock-ticker/
 ├── host.js        # Host 半区：curl 抓取腾讯行情接口并解析
 ├── client.js      # Client 半区：悬浮窗 UI + 5s 轮询
 ├── package.json   # 包清单（keywords 含 dsh-plugin）
@@ -62,7 +62,7 @@ dsh-market/
 
 1. 把 Host 半区改写成 DSH 包入口（`export function apply(ctx)`），并把 Host→Client 通信从动态插件的 `harness.handle`/`host.call` 迁移到 DSH 的 remote / projection 机制；
 2. 用标准工具链构建客户端 bundle（`dsh.client` → `./client`）；
-3. 发布 npm 后通过 `dsh plugin --profile <profile> add dsh-market@0.1.0` 安装。
+3. 发布 npm 后通过 `dsh plugin --profile <profile> add dsh-stock-ticker@0.1.0` 安装。
 
 欢迎 PR 补齐这一步。
 

@@ -3,4 +3,4 @@
 # path, see README.md — this file is not required.
 - insert:
     - id: market
-      name: 'dsh-market'
+      name: 'dsh-stock-ticker'

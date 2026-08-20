@@ -1,4 +1,4 @@
-// dsh-market — Client half (dynamic-plugin form)
+// dsh-stock-ticker — Client half (dynamic-plugin form)
 //
 // This file is the exact `code.client` body for a DeepSeek Harness dynamic
 // Cordis plugin. Load it with the Client `code.client` of `cordis_define`.
