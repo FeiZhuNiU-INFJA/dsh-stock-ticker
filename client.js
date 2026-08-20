@@ -5,10 +5,12 @@
 //
 // It injects a draggable, collapsible floating window into `shell.overlay`,
 // polls `getQuotes` every 5s, and renders each index as name + price + change%.
+// The card background follows the DSH theme surface token at 80% opacity, so it
+// stays consistent with the app's look while text and up/down colors stay crisp.
 
 const UP = '#ff3b30'
 const DOWN = '#00e08a'
-const NEUTRAL = '#eef0f4'
+const NEUTRAL = 'var(--dsw-alias-label-primary)'
 
 const fmt = (n) => {
   const v = Number(n)
@@ -23,19 +25,19 @@ return {
     if (slots === undefined) return
 
     ctx.effect(() => styles.insert(`
-.shq-widget{position:fixed;z-index:99999;width:216px;background:rgba(17,19,25,.92);color:#eef0f4;border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.32);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;user-select:none;-webkit-user-select:none;overflow:hidden}
-.shq-head{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:grab;touch-action:none;border-bottom:1px solid rgba(255,255,255,.08)}
+.shq-widget{position:fixed;z-index:99999;width:216px;background:#1a1c23;background:color-mix(in srgb, var(--dsw-alias-bg-overlay,#1a1c23) 80%, transparent);color:var(--dsw-alias-label-primary,#eef0f4);border:1px solid var(--dsw-alias-border-l1,rgba(255,255,255,.12));border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.25);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;user-select:none;-webkit-user-select:none;overflow:hidden}
+.shq-head{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:grab;touch-action:none;border-bottom:1px solid var(--dsw-alias-border-l1,rgba(255,255,255,.08))}
 .shq-head:active{cursor:grabbing}
-.shq-title{font-size:12px;font-weight:600;letter-spacing:.04em;color:rgba(238,240,244,.9)}
-.shq-toggle{width:18px;height:18px;border:none;border-radius:6px;background:rgba(255,255,255,.1);color:#aab0bc;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:.85}
-.shq-toggle:hover{background:rgba(255,255,255,.18);color:#eef0f4}
+.shq-title{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--dsw-alias-label-secondary,#c7ccd6)}
+.shq-toggle{width:18px;height:18px;border:none;border-radius:6px;background:var(--dsw-alias-border-l1,rgba(255,255,255,.1));color:var(--dsw-alias-label-secondary,#aab0bc);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:.85}
+.shq-toggle:hover{background:var(--dsw-alias-border-l2,rgba(255,255,255,.18));color:var(--dsw-alias-label-primary,#eef0f4)}
 .shq-body{padding:5px 12px 8px}
 .shq-row{display:flex;align-items:baseline;padding:6px 0}
-.shq-row + .shq-row{border-top:1px solid rgba(255,255,255,.07)}
-.shq-name{font-size:12.5px;color:rgba(199,204,214,.95);flex:1}
+.shq-row + .shq-row{border-top:1px solid var(--dsw-alias-border-l1,rgba(255,255,255,.07))}
+.shq-name{font-size:12.5px;color:var(--dsw-alias-label-secondary,#c7ccd6);flex:1}
 .shq-price{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 .shq-pct{font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums;width:64px;text-align:right}
-.shq-err{font-size:12px;color:#8f96a3;padding:4px 0}
+.shq-err{font-size:12px;color:var(--dsw-alias-label-secondary,#8f96a3);padding:4px 0}
 `))
 
     function Row(item) {

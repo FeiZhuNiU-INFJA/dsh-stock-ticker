@@ -7,10 +7,16 @@
   <img src="https://img.shields.io/badge/topic-dsh--plugin-7c3aed?style=flat-square" alt="dsh-plugin">
 </p>
 
+## 📸 预览
+
+<p align="center">
+  <img src="./assets/screenshot.png" alt="dsh-stock-ticker 悬浮行情" width="264">
+</p>
+
 ## ✨ 功能
 
 - 悬浮窗口，**可拖拽**、**可收起**
-- 深色近实色背景，红涨绿跌、锐利配色
+- 背景跟随 DeepSeek Harness 主题色（80% 透明度），红涨绿跌、锐利配色
 - 每 5 秒自动刷新
 - 每个指数只显示两项：**当前点位 + 涨跌幅**
 
@@ -46,6 +52,7 @@ dsh-stock-ticker/
 ├── client.js      # Client 半区：悬浮窗 UI + 5s 轮询
 ├── package.json   # 包清单（keywords 含 dsh-plugin）
 ├── cordis.patch.yml  # 持久化安装用的组合 patch 层（可选）
+├── assets/screenshot.png  # README 预览截图
 ├── LICENSE
 └── README.md
 ```
