@@ -29,20 +29,17 @@
 | 科创50 | 000688 |
 | 恒生科技 | HSTECH |
 
-## 🚀 快速开始（动态插件）
+## 🚀 安装
 
-这是当前验证可用的安装方式：作为一个 **DeepSeek Harness 动态 Cordis 插件**载入。
+作为常驻 bundle 安装，随 DSH 启动自动加载、重启不消失：
 
-1. 打开 DSH，让 agent 用动态插件工具创建插件（`cordis_define`）：
+```bash
+dsh plugin --profile web add github:FeiZhuNiU-INFJA/dsh-stock-ticker
+```
 
-   - `code.host` 填 [`host.js`](./host.js) 的整段内容
-   - `code.client` 填 [`client.js`](./client.js) 的整段内容
+装完重启 DSH（或选择「立即重启」），页面右上角即出现悬浮行情窗。
 
-2. 然后 `cordis_run` 激活。客户端首次运行需要你在审批卡片里点「允许」。
-
-3. 刷新页面后，右上角即出现悬浮行情窗。
-
-> 两个文件里的代码就是 `cordis_define` 的 `code.host` / `code.client` 函数体，直接整段复制即可，无需修改。
+> 结构遵循社区 `dsh-plugin` 约定：`dsh.bundle.patch` 指向 `cordis.patch.yml`，Host 入口 `lib/index.js` 注册同源路由 `/dsh-stock-ticker/quotes`（内部用 `shell` + `curl` 抓取腾讯行情），Client bundle `lib/client.js` 渲染悬浮窗并每 5 秒轮询该路由。
 
 ## 🗂️ 代码结构
 
@@ -65,20 +62,20 @@ dsh-stock-ticker/
 - 免费、无需鉴权，返回纯文本的 `~` 分隔行
 - Host 侧通过 `shell` 服务执行 `curl` 抓取（DSH 默认部署未注册 `web` fetch provider，因此不走 `web.fetch`）
 
-## 📦 持久化安装（常驻）
+## 🧪 动态插件（可选，临时体验）
 
-把插件作为 DSH profile 的一个 bundle 安装，随 DSH 启动自动加载、重启不消失：
+不落盘、临时载入的动态插件方式，适合快速体验：
 
-1. 把本仓库软链到 profile 的 node_modules：
+1. 让 agent 用动态插件工具 `cordis_define` 创建插件：
 
-   ```bash
-   ln -sfn /path/to/dsh-stock-ticker "$HOME/.dsh/profiles/node_modules/dsh-stock-ticker"
-   ```
+   - `code.host` 填 [`host.js`](./host.js) 的整段内容
+   - `code.client` 填 [`client.js`](./client.js) 的整段内容
 
-2. 在 `$HOME/.dsh/profiles/<profile>/package.json` 的 `dsh.profile.bundles` 数组里加入 `"dsh-stock-ticker"`。
-3. 重启 DSH Desktop。
+2. `cordis_run` 激活；客户端首次运行需要在审批卡片里点「允许」。
 
-> 结构参照社区 `dsh-plugin` 约定（与 `dsh-skin-cursor` 相同）：Host 入口 `lib/index.js` 注册同源路由 `/dsh-stock-ticker/quotes`（内部用 `shell` + `curl` 抓取腾讯行情），Client bundle `lib/client.js` 渲染悬浮窗并每 5 秒 `fetch` 该路由。
+3. 刷新页面后即出现悬浮行情窗。
+
+> 两个文件里的代码就是 `cordis_define` 的 `code.host` / `code.client` 函数体，直接整段复制即可。
 
 ## 📄 License
 
