@@ -10,7 +10,7 @@
 ## 📸 预览
 
 <p align="center">
-  <img src="./assets/screenshot.png" alt="dsh-stock-ticker 悬浮行情" width="264">
+  <img src="./assets/screenshot.png" alt="dsh-stock-ticker 悬浮行情" width="720">
 </p>
 
 ## ✨ 功能
