@@ -25,7 +25,8 @@ return {
     }
     const toNum = (s) => {
       const n = Number(s)
-      return Number.isFinite(n) ? n : null
+      if (!Number.isFinite(n)) return null
+      return Object.is(n, -0) ? 0 : n
     }
 
     harness.handle('getQuotes', async () => {
