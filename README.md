@@ -1,6 +1,6 @@
 # 🧩 dsh-stock-ticker
 
-> DeepSeek Harness 的一个悬浮行情插件：在页面右上角显示一个可拖拽、可收起的半透明小窗，实时展示 A 股与港股核心指数。
+> DeepSeek Harness 的一个底部行情栏插件：在窗口底部显示一条半透明 bar，实时展示 A 股与港股核心指数。
 
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2563eb?style=flat-square" alt="MIT License"></a>
@@ -10,15 +10,16 @@
 ## 📸 预览
 
 <p align="center">
-  <img src="./assets/screenshot.png" alt="dsh-stock-ticker 悬浮行情" width="720">
+  <img src="./assets/screenshot.png" alt="dsh-stock-ticker 底部行情栏" width="720">
 </p>
 
 ## ✨ 功能
 
-- 悬浮窗口，**可拖拽**、**可收起**
-- 背景跟随 DeepSeek Harness 主题色（80% 透明度），红涨绿跌、锐利配色
+- 固定在窗口**底部**的全宽行情 bar，半透明背景跟随 DeepSeek Harness 主题色（85% 透明度 + 背景模糊）
 - 每 5 秒自动刷新
-- 每个指数只显示两项：**当前点位 + 涨跌幅**
+- 可**收起**为右下角小胶囊，点击展开，不遮挡输入区
+- 每个指数只显示两项：**当前点位 + 涨跌幅**（红涨绿跌、锐利配色）
+- 横向排列，窄屏自动横向滚动
 
 显示的指数：
 
@@ -37,16 +38,16 @@
 dsh plugin --profile web add github:FeiZhuNiU-INFJA/dsh-stock-ticker
 ```
 
-装完重启 DSH（或选择「立即重启」），页面右上角即出现悬浮行情窗。
+装完重启 DSH（或选择「立即重启」），页面底部即出现行情 bar。
 
-> 结构遵循社区 `dsh-plugin` 约定：`dsh.bundle.patch` 指向 `cordis.patch.yml`，Host 入口 `lib/index.js` 注册同源路由 `/dsh-stock-ticker/quotes`（内部用 `shell` + `curl` 抓取腾讯行情），Client bundle `lib/client.js` 渲染悬浮窗并每 5 秒轮询该路由。
+> 结构遵循社区 `dsh-plugin` 约定：`dsh.bundle.patch` 指向 `cordis.patch.yml`，Host 入口 `lib/index.js` 注册同源路由 `/dsh-stock-ticker/quotes`（内部用 `shell` + `curl` 抓取腾讯行情），Client bundle `lib/client.js` 渲染底部行情栏并每 5 秒轮询该路由。
 
 ## 🗂️ 代码结构
 
 ```
 dsh-stock-ticker/
 ├── lib/index.js    # Host 包入口：注册 /dsh-stock-ticker/quotes 路由
-├── lib/client.js   # Client bundle：悬浮窗 UI + 5s 轮询
+├── lib/client.js   # Client bundle：底部行情栏 UI + 5s 轮询
 ├── host.js         # 动态插件形式的 Host 半区（可选）
 ├── client.js       # 动态插件形式的 Client 半区（可选）
 ├── package.json    # 包清单（dsh bundle + client 声明）
@@ -73,7 +74,7 @@ dsh-stock-ticker/
 
 2. `cordis_run` 激活；客户端首次运行需要在审批卡片里点「允许」。
 
-3. 刷新页面后即出现悬浮行情窗。
+3. 刷新页面后窗口底部即出现行情 bar。
 
 > 两个文件里的代码就是 `cordis_define` 的 `code.host` / `code.client` 函数体，直接整段复制即可。
 

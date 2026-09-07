@@ -1,7 +1,7 @@
 {
   "name": "dsh-stock-ticker",
-  "version": "0.1.0",
-  "description": "A floating, semi-transparent market ticker for DeepSeek Harness: real-time 上证指数 / 创业板指 / 科创50 / 恒生科技.",
+  "version": "0.2.0",
+  "description": "A fixed bottom market-ticker bar for DeepSeek Harness: real-time 上证指数 / 创业板指 / 科创50 / 恒生科技.",
   "license": "MIT",
   "keywords": [
     "dsh-plugin",
